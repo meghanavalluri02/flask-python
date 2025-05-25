@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: kp-deployment
+  name: kp-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: kp-deployment
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: kp-deployment
+    spec:
+      containers:
+      - image: kpkm25/test-flask-pipeline
+        name: test-flask-pipeline
+      volumeMount:
+        - name: vol-html
+          mountpath: "/home/parakram"
+        resources: {}
+    volumes:
+      - name: vol-html
+        persistentVolumeClaim:
+          claimName: pvc
+status: {}
