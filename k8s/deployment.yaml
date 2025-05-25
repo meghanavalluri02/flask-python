@@ -1,7 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  creationTimestamp: null
   labels:
     app: kp-deployment
   name: kp-deployment
@@ -10,22 +9,19 @@ spec:
   selector:
     matchLabels:
       app: kp-deployment
-  strategy: {}
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: kp-deployment
     spec:
       containers:
-      - image: kpkm25/test-flask-pipeline
-        name: test-flask-pipeline
-      volumeMount:
+      - name: test-flask-pipeline
+        image: kpkm25/test-flask-pipeline
+        volumeMounts:                    
         - name: vol-html
-          mountpath: "/home/parakram"
-        resources: {}
-    volumes:
+          mountPath: "/home/parakram"    
+        resources: {}                    
+      volumes:
       - name: vol-html
         persistentVolumeClaim:
           claimName: pvc
-status: {}
